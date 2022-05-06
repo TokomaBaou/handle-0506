@@ -13,6 +13,12 @@ interface State {
   /** targetPurchaseHistories の表示開始位置 */
   displayBeginIndex: number;
 }
+/**"20"を付与された商材タブを初期表示する */
+const initialState: State = {
+  targetYear: null,
+  targetCommodityId: "20",
+  displayBeginIndex: 0
+};
 
 export const Handle = () => {
   /** システム年 */
@@ -26,10 +32,17 @@ export const Handle = () => {
   const onSwitchTab = useCallback((commodityId) => {
     setState((state) => ({
       ...state,
-      displayIndex: 0,
+      displayBeginIndex: 0,
       targetCommodityId: commodityId
     }));
   }, []);
+  /**どの年次タブを選択しているかをハンドリングする */
+  const onSwitchYearTab = useCallback((year: number) => {
+    setState((state) => ({ ...state, displayBeginIndex: 0, targetYear: year }));
+  }, []);
 
-  return {} as const;
+  return {
+    onSwitchTab,
+    onSwitchYearTab
+  } as const;
 };
