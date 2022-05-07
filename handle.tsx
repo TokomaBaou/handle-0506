@@ -1,4 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
+import { useHistory } from "react-router-dom";
+
 interface TabDef {
   /** TODO: 商材区分ID、暫定値 */
   commodityId: "01" | "09" | "20" | null;
@@ -41,8 +43,15 @@ export const Handle = () => {
     setState((state) => ({ ...state, displayBeginIndex: 0, targetYear: year }));
   }, []);
 
+  /**クリック後 */
+  const history = useHistory();
+  const registerADAccountInformation = useCallback(() => {
+    history.push(``);
+  }, [history]);
+
   return {
     onSwitchTab,
-    onSwitchYearTab
+    onSwitchYearTab,
+    registerADAccountInformation
   } as const;
 };
